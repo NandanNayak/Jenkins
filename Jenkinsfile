@@ -19,11 +19,11 @@ pipeline {
                 archiveArtifacts("test-results.txt")
             }
         }
+    }
 
-        post {
-            success{
-                slackSend(channel: "#builds", color: "green", message: "build success")
-            }
+    post {
+        success{
+            slackSend(channel: "#builds", color: "green", message: "build success")
         }
     }
 }
