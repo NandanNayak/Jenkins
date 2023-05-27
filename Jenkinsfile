@@ -10,6 +10,12 @@ pipeline {
         stage("Test") {
             steps {
                 echo "This is test phase."
+
+                script {
+                    if (Math.random() > 0.5) {
+                        throw new Exception()
+                    }
+                }
             }
         }
 
