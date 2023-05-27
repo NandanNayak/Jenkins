@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        post{
+        post {
             success{
                 slackSend(channel: "#builds", color: "green", message: "build success")
             }
