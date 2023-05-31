@@ -10,7 +10,10 @@ pipeline {
         stage("Init") {
             steps {
                 // Calls a function
-                String initMessage = init()
+                script {
+                    String initMessage = init()
+                }
+
                 echo "${initMessage}"
             }
         }
