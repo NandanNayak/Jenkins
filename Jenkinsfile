@@ -1,16 +1,20 @@
 pipeline {
     agent any
     stages {
-        parallel {
-            stage("Build type 1") {
-                steps {
-                    echo "This is build phase 1"
-                }
-            }
+        stage("Build") {
+            failFast(true)
 
-            stage("Build type 2") {
-                steps {
-                    echo "This is build phase 2"
+            parallel {
+                stage("Build phase 1") {
+                    steps {
+                        echo "This is Build phase 1"
+                    }
+                }
+
+                stage("Build phase 2") {
+                    steps {
+                        echo "This is Build phase 2"
+                    }
                 }
             }
         }
