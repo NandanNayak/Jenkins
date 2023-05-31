@@ -1,9 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage("Build") {
-            steps {
-                echo "This is build phase."
+        parallel {
+            stage("Build type 1") {
+                steps {
+                    echo "This is build phase 1"
+                }
+            }
+
+            stage("Build type 2") {
+                steps {
+                    echo "This is build phase 2"
+                }
             }
         }
 
@@ -29,7 +37,7 @@ pipeline {
 
     post {
         success{
-            slackSend(channel: "#builds", color: "success", message: "build success")
+            slackSend(channel: "#builds", color: "green", message: "build success")
         }
 
         failure {
