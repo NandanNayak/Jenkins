@@ -30,7 +30,7 @@ pipeline {
                 MESSAGE = "This is a test phase."
             }
             steps {
-                echo ${MESSAGE}
+                echo "${MESSAGE}"
 
                 script {
                     System.out.println(env.GLOBAL_MSG)
