@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    // Global environment
+    environment {
+        GLOBAL_MSG = "This is a global variable"
+    }
+
     stages {
         stage("Build") {
             failFast(true)
@@ -20,14 +26,15 @@ pipeline {
         }
 
         stage("Test") {
+            environment {
+                MESSAGE = "This is a test phase."
+            }
             steps {
-                echo "This is test phase."
+                echo ${MESSAGE}
 
-//                 script {
-//                     if (Math.random() > 0.5) {
-//                         throw new Exception()
-//                     }
-//                 }
+                script {
+                    System.out.println(env.GLOBAL_MSG)
+                }
             }
         }
 
