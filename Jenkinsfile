@@ -11,10 +11,9 @@ pipeline {
             steps {
                 // Calls a function
                 script {
-                    String initMessage = init()
+                    String initMessage = init();
+                    System.out.println(initMessage);
                 }
-
-                echo "${initMessage}"
             }
         }
 
@@ -46,7 +45,7 @@ pipeline {
 
                 script {
                     // Accessing env variable in a Groovy script
-                    System.out.println(env.GLOBAL_MSG)
+                    System.out.println(env.GLOBAL_MSG);
                 }
             }
         }
