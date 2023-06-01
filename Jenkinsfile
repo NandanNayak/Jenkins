@@ -13,11 +13,15 @@ pipeline {
 
     stages {
         stage("Init") {
+            environment {
+                INIT_MESSAGE = initMessage()
+            }
             steps {
+                echo "${GLOBAL_MSG}"
+
                 // Calls a function
                 script {
-                    String initMessage = init();
-                    System.out.println(initMessage);
+                    echo "${INIT_MESSAGE}"
                 }
             }
         }
@@ -28,13 +32,14 @@ pipeline {
             parallel {
                 stage("Build phase 1") {
                     steps {
-                        echo "This is Build phase 1"
+                        //echo "This is Build phase 1."
+                        printMessage(message: "This is Build phase 1.")
                     }
                 }
 
                 stage("Build phase 2") {
                     steps {
-                        echo "This is Build phase 2"
+                        echo "This is Build phase 2."
                     }
                 }
             }
@@ -47,11 +52,6 @@ pipeline {
             steps {
                 // Accessing env variable in a shell script
                 echo "${MESSAGE}"
-
-                script {
-                    // Accessing env variable in a Groovy script
-                    System.out.println(env.GLOBAL_MSG);
-                }
             }
         }
 
@@ -83,6 +83,6 @@ pipeline {
     }
 }
 
-String init() {
+String initMessage() {
     return "This is Init phase."
 }
