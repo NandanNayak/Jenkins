@@ -83,6 +83,10 @@ pipeline {
     }
 }
 
+String initMessage() {
+    return "This is Init phase"
+}
+
 String printMessage(String message) {
     echo "${message}"
 }
