@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        booleanParams(name: "isPublishable", defaultValue: false, description: "Is the artifact publishable?")
+        // Valid parameter types: [booleanParam, choice, credentials, file, text, password, run, string]
+        booleanParam(name: "isPublishable", defaultValue: false, description: "Is the artifact publishable?")
     }
 
     // Global environment
