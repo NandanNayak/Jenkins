@@ -33,7 +33,7 @@ pipeline {
                 stage("Build phase 1") {
                     steps {
                         //echo "This is Build phase 1."
-                        printMessage(message: "This is Build phase 1.")
+                        printMessage("This is Build phase 1")
                     }
                 }
 
@@ -83,6 +83,6 @@ pipeline {
     }
 }
 
-String initMessage() {
-    return "This is Init phase."
+String printMessage(String message) {
+    echo "${message}"
 }
