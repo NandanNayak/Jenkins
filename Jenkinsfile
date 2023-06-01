@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        booleanParams(name: "isPublishable", defaultValue: false, description: "Is the artifact publishable?")
+    }
+
     // Global environment
     environment {
         GLOBAL_MSG = "This is a global variable."
@@ -54,6 +58,15 @@ pipeline {
             steps {
                 writeFile(file: "test-results.txt", text: "passed")
                 archiveArtifacts("test-results.txt")
+            }
+        }
+
+        stage("Publish") {
+            when {
+                expression { return params.isPublishable }
+            }
+            steps {
+                echo "This is Publish phase."
             }
         }
     }
