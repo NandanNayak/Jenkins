@@ -39,7 +39,7 @@ pipeline {
 
                 stage("Build phase 2") {
                     steps {
-                        echo "This is Build phase 2."
+                        printMessage("This is Build phase 2")
                     }
                 }
             }
@@ -67,14 +67,14 @@ pipeline {
                 expression { return params.isPublishable }
             }
             steps {
-                echo "This is Publish phase."
+                printMessage("This is Publish phase")
             }
         }
     }
 
     post {
         success{
-            slackSend(channel: "#builds", color: "success", message: "build success")
+            slackSend(channel: "builds", color: "success", message: "build success")
         }
 
         failure {
@@ -87,6 +87,6 @@ String initMessage() {
     return "This is Init phase"
 }
 
-String printMessage(String message) {
+void printMessage(String message) {
     echo "${message}"
 }
