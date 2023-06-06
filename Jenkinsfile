@@ -47,6 +47,15 @@ pipeline {
             }
         }
 
+        stage ("Docker agent") {
+            agent {
+                docker { image: "node:18.16.0-alpine"}
+            }
+            steps {
+                sh "node --version"
+            }
+        }
+
         stage("Test") {
             environment {
                 MESSAGE = "This is a test phase."
