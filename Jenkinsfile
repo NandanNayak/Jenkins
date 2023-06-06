@@ -49,7 +49,7 @@ pipeline {
 
         stage ("Docker agent") {
             agent {
-                docker { image: "node:18.16.0-alpine"}
+                docker { image "node:18.16.0-alpine"}
             }
             steps {
                 sh "node --version"
