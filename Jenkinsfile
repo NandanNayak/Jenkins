@@ -13,6 +13,7 @@ pipeline {
 
     stages {
         stage("Init") {
+            // This environment is local to this stage
             environment {
                 INIT_MESSAGE = initMessage()
             }
@@ -27,6 +28,7 @@ pipeline {
         }
 
         stage("Build") {
+            // Among the two parallel stages, which ever individual stage fails, fails the entire stage
             failFast(true)
 
             parallel {
@@ -57,6 +59,7 @@ pipeline {
 
         stage("Artifacts") {
             steps {
+                // This create a file in workspace and artifacts it
                 writeFile(file: "test-results.txt", text: "passed")
                 archiveArtifacts("test-results.txt")
             }
@@ -74,10 +77,12 @@ pipeline {
 
     post {
         success{
+            // "good" is for green color
             slackSend(channel: "builds", color: "good", message: "build success")
         }
 
         failure {
+            // "danger is for red color
             slackSend(channel: "builds", color: "danger", message: "build failure")
         }
     }
