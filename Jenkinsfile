@@ -74,7 +74,7 @@ pipeline {
 
     post {
         success{
-            slackSend(channel: "builds", color: "success", message: "build success")
+            slackSend(channel: "builds", color: "good", message: "build success")
         }
 
         failure {
