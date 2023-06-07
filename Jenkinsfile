@@ -56,6 +56,23 @@ pipeline {
             }
         }
 
+        stage ("Docker build") {
+            steps {
+                script {
+                    image = docker.build("hello-world:1.0")
+                }
+            }
+        }
+
+        stage ("Docker Run") {
+            steps {
+                script {
+                    container = image.run()
+                    container.stop()
+                }
+            }
+        }
+
         stage("Test") {
             environment {
                 MESSAGE = "This is a test phase."
