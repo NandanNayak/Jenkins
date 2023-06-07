@@ -59,7 +59,7 @@ pipeline {
         stage ("Docker build") {
             steps {
                 script {
-                    image = docker.build("hello-world:1.0")
+                    image = docker.build("nanayak/hello-world:1.0")
                 }
             }
         }
@@ -69,6 +69,16 @@ pipeline {
                 script {
                     container = image.run()
                     container.stop()
+                }
+            }
+        }
+
+        stage ("Docker Push") {
+            steps {
+                script {
+                    withDockerRegistry([credentialsId: "docker-creds", url: ""]) {
+                        image.push()
+                    }
                 }
             }
         }
