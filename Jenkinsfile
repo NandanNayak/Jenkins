@@ -60,8 +60,8 @@ pipeline {
         stage ("Docker build") {
             steps {
                 script {
-                    // Builds a docker image with tag nanayak/hello-world:1.0
-                    image = docker.build("nanayak/hello-world:1.0")
+                    // Builds a docker image with tag nanayak/jenkins-hello-world:1.0
+                    image = docker.build("nanayak/jenkins-hello-world:1.0")
                 }
             }
         }
