@@ -52,6 +52,7 @@ pipeline {
                 docker { image "node:18.16.0-alpine"}
             }
             steps {
+                // The below command gets run inside the node:18.16.0-alpine container
                 sh "node --version"
             }
         }
@@ -59,6 +60,7 @@ pipeline {
         stage ("Docker build") {
             steps {
                 script {
+                    // Builds a docker image with tag nanayak/hello-world:1.0
                     image = docker.build("nanayak/hello-world:1.0")
                 }
             }
@@ -76,6 +78,7 @@ pipeline {
         stage ("Docker Push") {
             steps {
                 script {
+                    // Pushes the image onto docker-hub
                     withDockerRegistry([credentialsId: "docker-creds", url: ""]) {
                         image.push()
                     }
